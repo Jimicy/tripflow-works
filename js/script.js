@@ -1,3 +1,5 @@
+angular.module('tripFlow', []).controller('TripController',['$scope', function($scope) {
+
 //Firebase
 var myDataRef = new Firebase('https://shining-inferno-4500.firebaseio.com/');
 
@@ -85,17 +87,15 @@ var events = [];
           }
           $("#profile-pic").attr("src", picture);
           $("#profile-pic").before(name);
+          $scope.events = events;
           myDataRef.child(response.id).set({name: name, picture: picture, events: events});
         }
       }
     );
   }
 
-myDataRef.on('child_added', function(snapshot) {
-  console.log(snapshot.val());
-});
+  myDataRef.on('child_added', function(snapshot) {
+    console.log(snapshot.val());
+  });
 
-function TripController($scope, $location) {
-  console.log(events);
-  $scope.events = events;
-}
+}]);
