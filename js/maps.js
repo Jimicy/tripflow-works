@@ -23,8 +23,6 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 function clearMarkers() {
   setMapOnAll(null);
-  clearMarkers();
-  markers = [];
   markers = [];
   total = 0;
 }
