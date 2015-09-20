@@ -63,6 +63,20 @@ $scope.toggleSelection = function toggleSelection(event) {
     });
   }
 
+  function loginFb() {
+    FB.login(function(response) {
+     if (response.authResponse) {
+       console.log('Welcome!  Fetching your information.... ');
+       FB.api('/me', function(response) {
+         console.log('Good to see you, ' + response.name + '.');
+       });
+       testAPI();
+     } else {
+       console.log('User cancelled login or did not fully authorize.');
+     }
+    }, {scope: 'public_profile,email,user_events,user_friends'});
+  }
+
 $scope.checkLoginState = checkLoginState;
 
   window.fbAsyncInit = function() {
