@@ -129,7 +129,7 @@ $scope.loginFb = loginFb;
           if (response.events.data) {
             var today = new Date(); //get today's date
             for (var event of response.events.data) {
-              if (event.place.location.latitude && event.place.location.longitude && event.start_time) {
+              if (event.start_time && event.place && event.place.location.latitude && event.place.location.longitude) {
                 var startDate = new Date(event.start_time);
                 if (startDate >= today) {
                   events.push(event);
