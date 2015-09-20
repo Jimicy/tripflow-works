@@ -1,0 +1,7 @@
+source 'https://rubygems.org'
+gem 'sinatra'
+gem 'json'
+gem 'httparty'
+gem 'sinatra-cross_origin'
+gem 'byebug'
+gem 'sinatra-reloader'
