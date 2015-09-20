@@ -27,7 +27,8 @@ function clearMarkers() {
 }
 
 function addMarkers(){
-	clearMarkers();
+	if(coordinate.length != 0)
+		clearMarkers();
 	for(var i = 0; i < coordinate.length; i++){
 		bounds.extend(new google.maps.LatLng(coordinate[i].lat, coordinate[i].lng));
 		console.log(coordinate);
@@ -118,7 +119,7 @@ function normalRoute(){
 	});
 }
 
-var yelpResult
+var yelpResult;
 
 function yelpSearch(location, term) {
 	$.ajax({
@@ -135,8 +136,8 @@ function yelpSearch(location, term) {
 function setData(data, optimize){
 	coordinate = data;
 	addMarkers();
-  if (data.length > 1) 
-	  calcRoute(optimize);
+	if (data.length > 1) 	 
+		calcRoute(optimize);	
 }
 
 
