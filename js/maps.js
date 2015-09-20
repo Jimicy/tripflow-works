@@ -4,7 +4,7 @@ var bounds = new google.maps.LatLngBounds();
 var directionsDisplay;
 var directionsService;
 var directionsDisplay;
-
+var markers;
 
 function initialize() {
 	var mapCanvas = document.getElementById('map');
@@ -133,7 +133,6 @@ function yelpSearch(location, term) {
 }
 
 function setData(data, optimize){
-	coordinate = [];
 	coordinate = data;
 	addMarkers();
   if (data.length > 1) 
