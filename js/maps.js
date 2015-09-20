@@ -24,14 +24,13 @@ google.maps.event.addDomListener(window, 'load', initialize);
 function clearMarkers() {
   setMapOnAll(null);
   markers = [];
-  total = 0;
 }
 
-markers = []
 function addMarkers(){
 	clearMarkers();
 	for(var i = 0; i < coordinate.length; i++){
 		bounds.extend(new google.maps.LatLng(coordinate[i].lat, coordinate[i].lng));
+		console.log(coordinate);
 		var marker = new google.maps.Marker({
 			position: {lat:coordinate[i].lat, lng:coordinate[i].lng},
 			map: map
@@ -136,9 +135,8 @@ function yelpSearch(location, term) {
 function setData(data, optimize){
 	coordinate = data;
 	addMarkers();
-  if (data.length > 1) {
+  if (data.length > 1) 
 	  calcRoute(optimize);
-  }
 }
 
 
