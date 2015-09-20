@@ -20,6 +20,7 @@ $scope.toggleSelection = function toggleSelection(event) {
   // is currently selected
   if (idx > -1) {
     $scope.selection.splice(idx, 1);
+    setData($scope.selection);
   }
 
   // is newly selected
