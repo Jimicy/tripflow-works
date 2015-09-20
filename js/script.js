@@ -4,6 +4,31 @@ angular.module('tripFlow', []).controller('TripController',['$scope', function($
 var myDataRef = new Firebase('https://shining-inferno-4500.firebaseio.com/');
 
 var events = [];
+
+//selected Events
+$scope.selection = [];
+
+//toggle selection for a given event by name
+$scope.toggleSelection = function toggleSelection(event) {
+  console.log(event);
+  var idx = $scope.selection.indexOf(event);
+
+  var pointOfInterest = {lat: event.place.location.latitude,
+                         lng: event.place.location.longitude,
+                         name: event.name};
+
+  // is currently selected
+  if (idx > -1) {
+    $scope.selection.splice(idx, 1);
+  }
+
+  // is newly selected
+  else {
+    $scope.selection.push(pointOfInterest);
+    //Draw the routes on the map.
+    setData($scope.selection);
+  }
+};
 //---------------------------------------------------
 
 // This is called with the results from from FB.getLoginStatus().
@@ -12,7 +37,7 @@ var events = [];
     console.log(response);
     // The response object is returned with a status field that lets the
     // app know the current login status of the person.
-    // Full docs on the response object can be found in the documentation
+    // Full docs on the response object can be found in t he documentation
     // for FB.getLoginStatus().
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
@@ -33,10 +58,12 @@ var events = [];
   // Button.  See the onlogin handler attached to it in the sample
   // code below.
   function checkLoginState() {
-    FB.getLoginStatus(function(response) {
+    FB.getLoginStatus(response => {
       statusChangeCallback(response);
     });
   }
+
+$scope.checkLoginState = checkLoginState;
 
   window.fbAsyncInit = function() {
   FB.init({
@@ -58,7 +85,7 @@ var events = [];
   //
   // These three cases are handled in the callback function.
 
-  FB.getLoginStatus(function(response) {
+  FB.getLoginStatus(response => {
     statusChangeCallback(response);
   });
 
@@ -82,12 +109,30 @@ var events = [];
         if (response && !response.error) {
           var name = response.name;
           var picture = response.picture.data.url;
+
+          console.log(response.events);
+
           if (response.events) {
-            events = response.events.data;
+            var today = new Date(); //get today's date
+            for (event of response.events) {
+              if (event.place.location.latitude && event.place.location.longitude) {
+                var startDate = new Date(event.start_time);
+                if (startDate >= today) {
+                  events.push(event);
+                }
+              }
+            }
           }
-          $("#profile-pic").attr("src", picture);
-          $("#profile-pic").before(name);
-          $scope.events = events;
+
+          console.log(events);
+
+          $scope.profileName = name;
+          $scope.profilePicURL = picture;
+
+          $scope.$apply(function () {
+            $scope.events = events;
+          });
+
           myDataRef.child(response.id).set({name: name, picture: picture, events: events});
         }
       }

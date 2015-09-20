@@ -26,7 +26,7 @@
         <ul class="nav navbar-nav navbar-right">
           <li class="active"><a href="#">Current</a></li>
           <li><a href="#about">Past Trips</a></li>
-          <li><a href="#"><img id="profile-pic" src="" class="img-circle profile-pic" /></a> </li>
+          <li><a href="#">{{profileName}}<img id="profile-pic" src="{{profilePicURL}}" class="img-circle profile-pic" /></a> </li>
         </ul>
       </div><!--/.nav-collapse -->
   </nav>
@@ -35,7 +35,7 @@
         <div class="sidebar">
           <ul class="nav nav-tabs">
             <li class="active"><a href="#home"><span class="glyphicon glyphicon-road" aria-hidden="true"></span></a></li>
-            <li><a href="#menu1"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></a></li>
+            <li><a href="#menu1"><span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span></a></li>
             <li><a href="#menu2"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></li>
           </ul>
           <div class="tab-content">
@@ -118,15 +118,17 @@
                       <div class="panel panel-new" ng-repeat="event in events">
                         <div class="panel-body">
                           <div class="row">
-                            <div class="col-md-4"><img src="https://ryanbolton.files.wordpress.com/2013/06/cn-tower-6.jpg" width="155px" /></div>
+                            <input
+                              type="checkbox"
+                              name="selectedEvents[]"
+                              value="{{event}}"
+                              ng-checked="selection.indexOf(event) > -1"
+                              ng-click="toggleSelection(event)">
+                            <div class="col-md-4"><img src="images/event_icon.png" width="155px" /></div>
                             <div class="col-md-8">
-                              1. <a href="#" class="link-title">{{event.name}}</a> <br />
-                              <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                              <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                              <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                              <span class="glyphicon glyphicon-star" aria-hidden="true"></span> <br />
-                              "Awesome free standing towering over the rest of the city."
-                              <a href="#" class="add-pin" id="loc-234"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span></a>
+                              <a href="#" class="link-title">{{event.name}}</a> <br />
+                              {{event.description | limitTo:115}}
+                              <a href="#" class="add-pin-fb" id="loc"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span></a>
                             </div>
                           </div>
                         </div>
@@ -151,7 +153,32 @@
               </div>
             </div>
             <div id="menu1" class="tab-pane fade">
-              <h3>Menu 2</h3>
+              <div class="travel-head">Saved Trips</div>
+              <br />
+              <div class="row saved-trip">
+                <div class="col-md-8" style="padding: 10px;">
+                  Niagara Falls, On | July 18th, 2015 <br /><span style="color: #B1B1B1;">Saved Trip</span>
+                </div>
+                <a href="#"><div class="col-md-4 view-trip">View Trip</div></a>
+              </div>
+              <div class="row saved-trip">
+                <div class="col-md-8" style="padding: 10px;">
+                  Niagara Falls, On | July 18th, 2015 <br /><span style="color: #B1B1B1;">Saved Trip</span>
+                </div>
+                <a href="#"><div class="col-md-4 view-trip">View Trip</div></a>
+              </div>
+              <div class="row saved-trip">
+                <div class="col-md-8" style="padding: 10px;">
+                  Niagara Falls, On | July 18th, 2015 <br /><span style="color: #B1B1B1;">Saved Trip</span>
+                </div>
+                <a href="#"><div class="col-md-4 view-trip">View Trip</div></a>
+              </div>
+              <div class="row saved-trip">
+                <div class="col-md-8" style="padding: 10px;">
+                  Niagara Falls, On | July 18th, 2015 <br /><span style="color: #B1B1B1;">Saved Trip</span>
+                </div>
+                <a href="#"><div class="col-md-4 view-trip">View Trip</div></a>
+              </div>
             </div>
             <div id="menu2" class="tab-pane fade">
               <h3>Menu 3</h3>
@@ -190,13 +217,13 @@
           return $("#popover-content").html();
         }
       });
-      $( "#loc-123" ).click(function() {
+      $( ".add-pin" ).click(function() {
         $("<div></div>").appendTo("#timeline").hide().append("<img id='tl-123' src='http://www.livincool.com/wp-content/uploads/2013/01/rome1.png' height='100px' style='float: left;' />").fadeIn('slow');
         $("#loc-123").hide();
       });
-      $( "#loc-234" ).click(function() {
-        $("<div></div>").appendTo("#timeline").hide().append("<img id='tl-234' src='https://ryanbolton.files.wordpress.com/2013/06/cn-tower-6.jpg' height='100px' style='float: left;' />").fadeIn('slow');
-        $("#loc-234").hide();
+      $( ".add-pin-fb" ).click(function() {
+        $("<div></div>").appendTo("#timeline").hide().append("<img id='tl-123' src='https://cdn2.iconfinder.com/data/icons/flat-ui-free/200/calendar.png' height='100px' style='float: left;' />").fadeIn('slow');
+        $("#loc-123").hide();
       });
     </script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBiGE9sjCg4FtpySvRyMHSDroAN6Ysh5Do"></script>
