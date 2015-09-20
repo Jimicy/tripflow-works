@@ -29,7 +29,7 @@ function clearMarkers() {
 }
 
 function addMarkers(){
-	if(coordinate)
+	if(markers)
 		clearMarkers();
 	for(var i = 0; i < coordinate.length; i++){
 		bounds.extend(new google.maps.LatLng(coordinate[i].lat, coordinate[i].lng));
