@@ -4,7 +4,7 @@ var bounds = new google.maps.LatLngBounds();
 var directionsDisplay;
 var directionsService;
 var directionsDisplay;
-var markers;
+var markers = [];
 
 function initialize() {
 	var mapCanvas = document.getElementById('map');
@@ -22,18 +22,16 @@ function initialize() {
 google.maps.event.addDomListener(window, 'load', initialize);
 
 function clearMarkers() {
-  for (var i = 0; i < markers.length; i++) {
-    markers[i].setMap(null);
-  }
+  markers.forEach(function(marker) {
+    marker.setMap(null);
+  })
   markers = [];
 }
 
 function addMarkers(){
-	if(markers)
-		clearMarkers();
+	clearMarkers();
 	for(var i = 0; i < coordinate.length; i++){
 		bounds.extend(new google.maps.LatLng(coordinate[i].lat, coordinate[i].lng));
-		console.log(coordinate);
 		var marker = new google.maps.Marker({
 			position: {lat:coordinate[i].lat, lng:coordinate[i].lng},
 			map: map
@@ -121,7 +119,7 @@ function normalRoute(){
 	});
 }
 
-var yelpResult;
+var yelpResult
 
 function yelpSearch(location, term) {
 	$.ajax({
@@ -138,8 +136,9 @@ function yelpSearch(location, term) {
 function setData(data, optimize){
 	coordinate = data;
 	addMarkers();
-	if (data.length > 1) 	 
-		calcRoute(optimize);	
+  if (data.length > 1) {
+	  calcRoute(optimize);
+  }
 }
 
 
