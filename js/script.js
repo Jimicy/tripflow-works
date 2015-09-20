@@ -95,7 +95,7 @@ myDataRef.on('child_added', function(snapshot) {
   console.log(snapshot.val());
 });
 
-function tripController($scope, $location) {
+function TripController($scope, $location) {
   console.log(events);
   $scope.events = events;
 }
