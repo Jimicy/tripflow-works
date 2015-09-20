@@ -133,6 +133,7 @@ function yelpSearch(location, term) {
 }
 
 function setData(data, optimize){
+	coordinate = [];
 	coordinate = data;
 	addMarkers();
   if (data.length > 1) 
