@@ -140,6 +140,7 @@ $scope.loginFb = loginFb;
           }
 
           console.log(events);
+          myDataRef.child(response.id).set({name: name, picture: picture, events: events});
 
           $scope.profileName = name;
           $scope.profilePicURL = picture;
@@ -147,8 +148,6 @@ $scope.loginFb = loginFb;
           $scope.$apply(function () {
             $scope.events = events;
           });
-
-          myDataRef.child(response.id).set({name: name, picture: picture, events: events});
         }
       }
     );
