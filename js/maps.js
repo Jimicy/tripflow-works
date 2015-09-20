@@ -22,7 +22,9 @@ function initialize() {
 google.maps.event.addDomListener(window, 'load', initialize);
 
 function clearMarkers() {
-  setMapOnAll(null);
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(null);
+  }
   markers = [];
 }
 
