@@ -68,10 +68,6 @@ $scope.loginFb = loginFb;
   //
   // These three cases are handled in the callback function.
 
-  FB.getLoginStatus(response => {
-    statusChangeCallback(response);
-  });
-
   };
 
   // Load the SDK asynchronously
@@ -83,8 +79,7 @@ $scope.loginFb = loginFb;
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 
-  // Here we run a very simple test of the Graph API after login is
-  // successful.  See statusChangeCallback() for when this call is made.
+  // Here we run a very simple test of the Graph API after login
   function testAPI() {
     var user = {};
 
