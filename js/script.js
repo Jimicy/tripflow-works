@@ -20,6 +20,7 @@ $scope.toggleSelection = function toggleSelection(event) {
   // is currently selected
   if (idx > -1) {
     $scope.selection.splice(idx, 1);
+
     setData($scope.selection);
   }
 
@@ -29,6 +30,7 @@ $scope.toggleSelection = function toggleSelection(event) {
     //Draw the routes on the map.
     setData($scope.selection);
   }
+  console.log($scope.selection);
 };
 //---------------------------------------------------
 
