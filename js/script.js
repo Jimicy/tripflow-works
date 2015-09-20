@@ -77,7 +77,7 @@ $scope.toggleSelection = function toggleSelection(event) {
     }, {scope: 'public_profile,email,user_events,user_friends'});
   }
 
-$scope.checkLoginState = checkLoginState;
+$scope.loginFb = loginFb;
 
   window.fbAsyncInit = function() {
   FB.init({
