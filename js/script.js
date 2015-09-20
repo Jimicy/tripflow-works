@@ -12,7 +12,7 @@ $scope.selection = [];
 $scope.toggleSelection = function toggleSelection(event) {
   console.log(event);
   var idx = $scope.selection.indexOf(event);
-
+  console.log($scope.selection);
   var pointOfInterest = {lat: event.place.location.latitude,
                          lng: event.place.location.longitude,
                          name: event.name};
@@ -20,7 +20,7 @@ $scope.toggleSelection = function toggleSelection(event) {
   // is currently selected
   if (idx > -1) {
     $scope.selection.splice(idx, 1);
-
+    console.log($scope.selection);
     setData($scope.selection);
   }
 
@@ -29,8 +29,8 @@ $scope.toggleSelection = function toggleSelection(event) {
     $scope.selection.push(pointOfInterest);
     //Draw the routes on the map.
     setData($scope.selection);
+    console.log($scope.selection);
   }
-  console.log($scope.selection);
 };
 //---------------------------------------------------
 
